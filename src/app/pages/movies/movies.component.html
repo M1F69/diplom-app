@@ -1,0 +1,59 @@
+<div class="flex items-center pt-12 justify-between">
+  <div class="text-lg space-x-4 select-none">
+    <span class="text-slate-900 font-bold cursor-pointer" (click)="handleRouteHome()">Главная</span>
+    <span class="text-slate-600 font-medium">/</span>
+    <span class="text-slate-600 font-medium">Жанр</span>
+  </div>
+
+  <div>
+
+    <div
+      class="select-none relative inline-flex items-center cursor-pointer h-8 rounded bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700"
+      (click)="handleAppendDialog()"
+    >
+      <div class="flex items-center inset-0 h-full mx-auto px-3 ">
+        <div>Новый фильм</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div class="py-8">
+  <div class="flex flex-row h-8 space-x-8">
+
+    <app-toggle>
+      Hatiko
+    </app-toggle>
+
+    <app-toggle>
+      Беременна 16
+    </app-toggle>
+
+    <app-toggle>
+      Секс в большом городе
+    </app-toggle>
+
+    <app-toggle>
+      Токийская гульнара
+    </app-toggle>
+
+  </div>
+</div>
+<div class="relative flex flex-col flex-1 my-6">
+  <div class="absolute inset-0 w-full h-full overflow-hidden">
+    <div class="min-h-0 min-w-0 h-full w-full overflow-y-auto no-scrollbar">
+      <div class="flex flex-wrap justify-between items-start gap-14">
+
+        @for (_ of arr;track $index) {
+          <app-movie-card
+            name="Наименование"
+            href="https://i.pinimg.com/564x/80/c5/a4/80c5a41a81ff6a957da72ab5c97dfda4.jpg"
+          />
+        }
+
+      </div>
+
+    </div>
+  </div>
+</div>

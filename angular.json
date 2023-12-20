@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ng-devui/devui.min.css"
             ],
             "scripts": []
           },
@@ -67,6 +68,9 @@
             "development": {
               "buildTarget": "kyrsovoy2:build:development"
             }
+          },
+          "options": {
+            "proxyConfig": "proxy.config.js"
           },
           "defaultConfiguration": "development"
         },

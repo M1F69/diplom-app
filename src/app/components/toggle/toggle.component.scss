@@ -1,0 +1,7 @@
+.active{
+  @apply bg-blue-500 text-white border border-blue-500  hover:bg-blue-600
+}
+.passive{
+  @apply text-slate-600 border
+
+}
