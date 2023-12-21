@@ -1,13 +1,16 @@
+import {map} from "rxjs";
+
 import {Component, inject} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 import {ModalModule} from 'ng-devui/modal';
 
 import {MovieCardComponent, MovieCoverComponent} from "../../components";
 import {CreateDialogComponent} from "./create-dialog/create-dialog.component";
-import {HttpClient, HttpParams} from "@angular/common/http";
 import {DxButtonModule, DxLoadIndicatorModule, DxPopupModule} from "devextreme-angular";
 import {TypeDialogComponent} from "./movie-dialog/movie-dialog.component";
+import {filterCategory, filterType} from "../../utils/odata";
 
 enum MovieTypeFlag {
   None = 0,
@@ -39,6 +42,7 @@ export class MoviesComponent {
   router = inject(Router);
   httpClient = inject(HttpClient);
 
+  category: string = '';
   loading: boolean = false;
   creating: boolean = false;
   collection: any = []
@@ -108,34 +112,33 @@ export class MoviesComponent {
   query() {
     this.loading = true;
 
-    const filters: any = [];
+    const filters: any = [
+      filterCategory(this.category)
+    ];
 
     if (this.hasDefault) {
-      filters.push("type eq Films.Types.MovieType\'Default\'")
+      filters.push(filterType("Default"))
     }
 
     if (this.hasSerial) {
-      filters.push("type eq Films.Types.MovieType\'Serial\'")
+      filters.push(filterType("Serial"))
     }
 
     if (this.hasAnime) {
-      filters.push("type eq Films.Types.MovieType\'Anime\'")
+      filters.push(filterType("Anime"))
     }
 
     if (this.hasCartoon) {
-      filters.push("type eq Films.Types.MovieType\'Cartoon\'")
+      filters.push(filterType("Cartoon"))
     }
 
     let params = new HttpParams()
-
-    if(filters.length) {
-      params = params.append("$filter", filters.join(" or "))
-    }
+    params = params.append("$filter", filters.join(" or "))
 
     this.httpClient.get('/api/Movies/', {
       params
     }).subscribe({
-      next: ({ value }: any) => {
+      next: ({value}: any) => {
         this.collection = value
         this.loading = false;
       },
@@ -167,7 +170,12 @@ export class MoviesComponent {
   }
 
   constructor() {
-    this.query();
+    inject(ActivatedRoute).queryParams.pipe(
+      map((params) => params['category'])
+    ).subscribe((value) => {
+      this.category = value;
+      this.query();
+    });
   }
 
 
