@@ -1,0 +1,13 @@
+@if(loading) {
+  <div class="h-full flex items-center justify-center">
+    <dx-load-indicator
+      height="50px"
+      width="50px"
+    ></dx-load-indicator>
+  </div>
+} @else {
+  <img
+    class="object-cover h-full w-max-full"
+    [src]="href" alt="*"
+  />
+}

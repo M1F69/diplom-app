@@ -1,0 +1,55 @@
+<dx-popup
+  [visible]="true"
+  [title]="selection.name"
+  [showCloseButton]="true"
+  [hideOnOutsideClick]="true"
+  (onHiding)="close.emit()"
+>
+  <div *dxTemplate="let data of 'content'">
+    <div class="flex flex-row">
+      <div></div>
+      <div class="flex-1 flex flex-col">
+        <div class="flex flex-row justify-around">
+          <div>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/u15tEo0wsQI?si=g_wneQptX-ngqF0T"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="h-[315px] max-w-[350px] w-auto">
+            <app-movie-cover tabindex="0" [id]="selection.id"/>
+          </div>
+        </div>
+        <div>
+          <div class="dx-fieldset">
+            <div class="dx-fieldset-header">Основная информация</div>
+            <div class="dx-field">
+              <div class="dx-field-label">Год выхода</div>
+              <div class="dx-field-value-static">{{selection.year}}</div>
+            </div>
+            <div class="dx-field">
+              <div class="dx-field-label">Категория</div>
+              <div class="dx-field-value-static">{{selection.genre}}</div>
+            </div>
+            <div class="dx-field">
+              <div class="dx-field-label">Жанр</div>
+              <div class="dx-field-value-static">{{selection.type}}</div>
+            </div>
+            <div class="dx-field">
+              <div class="dx-field-label">Описание</div>
+              <div class="dx-field-value-static">
+                {{selection.description}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</dx-popup>

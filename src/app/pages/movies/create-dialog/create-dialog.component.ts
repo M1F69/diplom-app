@@ -1,16 +1,16 @@
-import {Component, Input, ViewEncapsulation} from "@angular/core";
-import {
-  ButtonModule,
-  DatepickerModule,
-  FormLayout,
-  FormModule,
-  IFileOptions, IUploadOptions,
-  SelectModule,
-  TextInputModule,
-  UploadModule
-} from "ng-devui";
+import {Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from "@angular/core";
+import {ButtonModule, DatepickerModule, FormModule, SelectModule, TextInputModule, UploadModule} from "ng-devui";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AppendToBodyDirection} from "ng-devui/utils";
+import {
+  DxButtonModule,
+  DxDropDownBoxModule,
+  DxFormComponent,
+  DxFormModule, DxListModule,
+  DxPopupModule,
+  DxSelectBoxModule
+} from "devextreme-angular";
+import ArrayStore from "devextreme/data/array_store";
+
 
 @Component({
   standalone: true,
@@ -23,57 +23,81 @@ import {AppendToBodyDirection} from "ng-devui/utils";
     SelectModule,
     UploadModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DxFormModule,
+    DxSelectBoxModule,
+    DxButtonModule,
+    DxPopupModule,
+    DxDropDownBoxModule,
+    DxListModule
   ],
   templateUrl: './create-dialog.component.html',
   encapsulation: ViewEncapsulation.None
 })
 export class CreateDialogComponent {
-  @Input() data!: { type: string, handle: (payload: any) => void }
+  @Output() save = new EventEmitter<any>();
+  @Output() close = new EventEmitter<any>();
 
+  @ViewChild(DxFormComponent) dxFormRef!: DxFormComponent;
+
+  file: File | null = null;
   href: string | null = null;
+  record: any = {};
+  genres: any[] = [];
 
-  layoutDirection: FormLayout = FormLayout.Vertical;
-
-  appendToBodyDirections: AppendToBodyDirection[] = ['centerDown', 'centerUp'];
-  fileOptions: IFileOptions = {multiple: false, accept: '.png,.zip,.jpg',};
-  uploadOptions: IUploadOptions = { uri: '', maximumCount: 1, maximumSize: Number.MAX_SAFE_INTEGER};
-
-  formGroup = new FormGroup({
-    name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    year: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    genre: new FormControl<Array<{ name: string, value: number }>>([], { nonNullable: true }),
-    file: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+  genreStore = new ArrayStore({
+    key: 'id',
+    data: [
+      {id: 0, name: "Фантастика"},
+      {id: 1, name: "Ужасы"},
+      {id: 2, name: "Семейный"},
+      {id: 3, name: "Мюзикл"},
+      {id: 4, name: "Криминал"},
+      {id: 5, name: "Мелодрама"},
+      {id: 6, name: "Комедия"},
+      {id: 7, name: "Документальный"},
+      {id: 8, name: "Боевик"},
+      {id: 9, name: "Военный"},
+      {id: 10, name: "Детектив"},
+    ]
   })
 
-  options = [
-    {value: 0, name: "фантастика"},
-    {value: 1, name: "ужасы"},
-    {value: 2, name: "семейный"},
-    {value: 3, name: "мюзикл"},
-    {value: 4, name: "криминал"},
-    {value: 5, name: "мелодрама"},
-    {value: 6, name: "комедия"},
-    {value: 7, name: "документальный"},
-    {value: 8, name: "боевик"},
-    {value: 9, name: "военный"},
-    {value: 10, name: "детектив"},
-  ];
-
-  file!: File
-
-  handleDrop(file: File) {
-    this.file = file
-    this.href = URL.createObjectURL(file);
-  }
+  typeStore = new ArrayStore({
+    key: 'id',
+    data: [
+      {id: 0, name: "Фильм"},
+      {id: 1, name: "Мультфильм"},
+      {id: 2, name: "Сериал"},
+      {id: 3, name: "Аниме"},
+    ]
+  })
 
   handleSave() {
-    this.formGroup.markAllAsTouched();
+    const validation = this.dxFormRef.instance.validate()
 
-    if(!this.formGroup.valid) {
-      return
+    if(!validation.isValid || !this.file) {
+      return;
+    }
+    this.save.emit({...this.dxFormRef.formData, genre: [...this.genres], file: this.file});
+
+    this.record = {}
+    this.genres = []
+  }
+
+  handleUpload() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = e => {
+      const input = (e.target as HTMLInputElement);
+      this.file = input.files![0];
+      this.href = URL.createObjectURL(this.file);
     }
 
-    this.data.handle({ ...this.formGroup.value, file: this.file });
+    input.click();
   }
+
+  constructor() {
+    this.handleSave = this.handleSave.bind(this)
+  }
+
 }

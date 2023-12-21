@@ -9,11 +9,12 @@
 
     <div
       class="select-none relative inline-flex items-center cursor-pointer h-8 rounded bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700"
-      (click)="handleAppendDialog()"
+      (click)="creating = true"
     >
-      <div class="flex items-center inset-0 h-full mx-auto px-3 ">
-        <div>Новый фильм</div>
-      </div>
+      <dx-button type="default" width="100%" text="Новый фильм"/>
+
+      <!--      <div class="flex items-center inset-0 h-full mx-auto px-3 ">-->
+      <!--      </div>-->
     </div>
 
   </div>
@@ -22,38 +23,72 @@
 <div class="py-8">
   <div class="flex flex-row h-8 space-x-8">
 
-    <app-toggle>
-      Hatiko
-    </app-toggle>
 
-    <app-toggle>
-      Беременна 16
-    </app-toggle>
+    <dx-button
+      width="100%"
+      text="Ha4iko"
+      [type]="hasDefault ? 'default' : 'normal'"
+      [stylingMode]="hasDefault ? 'contained' : 'outlined'"
+      (onClick)="handleDefaultFilter()"
+    />
 
-    <app-toggle>
-      Секс в большом городе
-    </app-toggle>
+    <dx-button
+      width="100%"
+      text="Беременна 16"
+      [type]="hasAnime ? 'default' : 'normal'"
+      [stylingMode]="hasAnime ? 'contained' : 'outlined'"
+      (onClick)="handleAnimeFilter()"
+    />
 
-    <app-toggle>
-      Токийская гульнара
-    </app-toggle>
+    <dx-button
+      width="100%"
+      text="Секс в большом городе"
+      [type]="hasSerial ? 'default' : 'normal'"
+      [stylingMode]="hasSerial ? 'contained' : 'outlined'"
+      (onClick)="handleSerialFilter()"
+    />
+
+    <dx-button
+      width="100%"
+      text="Токийская гульнара"
+      [type]="hasCartoon ? 'default' : 'normal'"
+      [stylingMode]="hasCartoon ? 'contained' : 'outlined'"
+      (onClick)="handleCartoonFilter()"
+    />
 
   </div>
 </div>
 <div class="relative flex flex-col flex-1 my-6">
-  <div class="absolute inset-0 w-full h-full overflow-hidden">
-    <div class="min-h-0 min-w-0 h-full w-full overflow-y-auto no-scrollbar">
-      <div class="flex flex-wrap justify-between items-start gap-14">
 
-        @for (_ of arr;track $index) {
-          <app-movie-card
-            name="Наименование"
-            href="https://i.pinimg.com/564x/80/c5/a4/80c5a41a81ff6a957da72ab5c97dfda4.jpg"
-          />
-        }
-
-      </div>
-
+  @if (loading) {
+    <div class="absolute inset-0 w-full h-full flex items-center justify-center">
+      <dx-load-indicator
+        height="50px"
+        width="50px"
+      ></dx-load-indicator>
     </div>
-  </div>
+  } @else {
+    <div class="absolute inset-0 w-full h-full overflow-hidden">
+      <div class="min-h-0 min-w-0 h-full w-full overflow-y-auto no-scrollbar">
+        <div class="relative flex flex-wrap justify-between items-start gap-14">
+          @for (item of collection;track item.id) {
+            <app-movie-card [item]="item" (click)="handleMovieClick(item)"/>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+
 </div>
+
+@if (selection) {
+  <app-movie-dialog (close)="selection = null" [selection]="selection" />
+}
+
+@if(creating) {
+  <app-create-dialog (save)="handleSave($event) " (close)="creating = false"/>
+}
+
+
+

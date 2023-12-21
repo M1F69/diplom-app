@@ -1,81 +1,85 @@
-<form dForm [layout]="layoutDirection" [formGroup]="formGroup">
-  <d-form-item>
-    <d-form-label [required]="true">Название</d-form-label>
-    <d-form-control>
-      <div>
-        <input
-          formControlName="name"
-          dTextInput
-          autocomplete="off"
-          name="name"
-        />
-      </div>
-    </d-form-control>
-  </d-form-item>
-
-  <d-form-item>
-    <d-form-label [required]="true">Дата выхода</d-form-label>
-    <d-form-control>
-      <input
-        formControlName="year"
-        dDatepicker
-        mode="year"
-        dateFormat="y"
-        class="devui-input devui-form-control"
-        placeholder=""
-        name="year"
-        autocomplete="off"
-        appendToBody
-        [appendToBodyDirections]="appendToBodyDirections"
-      />
-    </d-form-control>
-  </d-form-item>
-
-  <d-form-item>
-    <d-form-label [required]="true">Жанр рено</d-form-label>
-    <d-form-control>
-      <d-select
-        formControlName="genre"
-        [options]="options"
-        [isSearch]="true"
-        [multiple]="true"
-        [filterKey]="'name'"
-        [appendToBody]="true"
+<dx-popup [visible]="true" title="Добавление" (onHiding)="close.emit()">
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    [options]="{ icon: 'save', type: 'normal', stylingMode: 'text', onClick: handleSave }"
+  />
+  <div *dxTemplate="let data of 'content'">
+    <dx-form [formData]="record" [colCount]="3" labelMode="outside" labelLocation="top">
+      <dxi-item
+        dataField="name"
+        editorType="dxTextBox"
+        [colSpan]="3"
       >
-      </d-select>
-    </d-form-control>
-  </d-form-item>
+        <dxo-label text="Название" />
+        <dxi-validation-rule type="required" message="Название обязательное"/>
+      </dxi-item>
 
-  <d-form-item>
-    <d-form-label [required]="true">Жанр рено</d-form-label>
-    <d-form-control>
-      <d-single-upload
-        formControlName="file"
-        [autoUpload]="false"
-        [withoutBtn]="true"
-        [placeholderText]="'бла'"
-        [fileOptions]="fileOptions"
-        [uploadOptions]="uploadOptions"
-        (fileSelect)="handleDrop($event)"
-      />
-    </d-form-control>
-  </d-form-item>
-</form>
+      <dxi-item
+        dataField="year"
+        editorType="dxDateBox"
+        [colCount]="1"
+        [editorOptions]="{ type: 'date', displayFormat: 'yyyy', zoomLevel: 'year' }"
+      >
+        <dxo-label text="Дата выхода" />
+        <dxi-validation-rule type="required" message="Дата обязательное"/>
+      </dxi-item>
 
-@if (href) {
-  <div class="h-80">
-    <img [src]="href" alt="*">
+      <dxi-item
+        dataField="type"
+        editorType="dxSelectBox"
+        [colCount]="1"
+        [editorOptions]="{ dataSource: typeStore, displayExpr: 'name', valueExpr: 'id' }"
+      >
+        <dxo-label text="Категория" />
+        <dxi-validation-rule type="required" message="Дата обязательное"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="genre"
+        [colCount]="1"
+      >
+        <div *dxTemplate>
+          <dx-drop-down-box
+            valueExpr="id"
+            displayExpr="name"
+            [(value)]="genres"
+            [dataSource]="genreStore"
+          >
+            <div *dxTemplate="let data of 'content'">
+              <dx-list
+                keyExpr="id"
+                displayExpr="name"
+                selectionMode="multiple"
+                [dataSource]="genreStore"
+                [(selectedItemKeys)]="genres"
+              />
+            </div>
+          </dx-drop-down-box>
+        </div>
+        <dxo-label text="Жанр" />
+        <dxi-validation-rule type="required" message="Жанр обязателен"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="description"
+        editorType="dxTextArea"
+        [colSpan]="3"
+      >
+        <dxo-label text="Описание" />
+        <dxi-validation-rule type="required" message="Описание обязательное"/>
+      </dxi-item>
+
+      <dxi-item [colSpan]="3">
+        <dx-button type="success" width="100%" text="Загрузить изображение" (onClick)="handleUpload()"/>
+      </dxi-item>
+
+    </dx-form>
+
+    @if (href) {
+      <div class="h-80">
+        <img [src]="href" alt="*">
+      </div>
+    }
   </div>
-}
-
-<div>
-  <div
-    class="select-none relative inline-flex items-center cursor-pointer h-8 rounded bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700"
-    (click)="handleSave()"
-  >
-    <div class="flex items-center inset-0 h-full mx-auto px-3 ">
-      <div>Сохранить</div>
-    </div>
-  </div>
-</div>
-
+</dx-popup>
