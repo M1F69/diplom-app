@@ -132,7 +132,7 @@ export class MoviesComponent {
 
     let params = new HttpParams()
 
-    params = params.append("$filter", `(${filters.join(" or ")})` + ` and ${filterCategory(this.category)}`)
+    params = params.append("$filter", filters.length ? `(${filters.join(" or ")})` + ` and ${filterCategory(this.category)}` : filterCategory(this.category))
 
     this.httpClient.get('/api/Movies/', {
       params
