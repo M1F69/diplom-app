@@ -112,9 +112,7 @@ export class MoviesComponent {
   query() {
     this.loading = true;
 
-    const filters: any = [
-      filterCategory(this.category)
-    ];
+    const filters: any = [];
 
     if (this.hasDefault) {
       filters.push(filterType("Default"))
@@ -133,7 +131,8 @@ export class MoviesComponent {
     }
 
     let params = new HttpParams()
-    params = params.append("$filter", filters.join(" or "))
+
+    params = params.append("$filter", `(${filters.join(" or ")})` + ` and ${filterCategory(this.category)}`)
 
     this.httpClient.get('/api/Movies/', {
       params
