@@ -6,11 +6,16 @@
   (onHiding)="close.emit()"
 >
   @if(appService.user.id !== null) {
-    <dxi-toolbar-item
-      widget="dxButton"
-      location="after"
-      [options]="{ icon: 'eyeopen', type: 'normal', stylingMode: 'text', onClick: handleViewed }"
-    />
+
+    @if(!viewed) {
+      <dxi-toolbar-item
+        widget="dxButton"
+        location="after"
+        [options]="{ icon: 'eyeopen', type: 'normal', stylingMode: 'text', onClick: handleViewed }"
+      />
+    }
+
+
     <dxi-toolbar-item
       widget="dxButton"
       location="after"

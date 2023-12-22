@@ -6,7 +6,7 @@ import {CreateDialogComponent} from "../../../pages/movies/create-dialog";
 import {HttpClient} from "@angular/common/http";
 import {getTypeBy} from "../../../utils/normalize-type";
 import {getGenreBy, getGenresBy} from "../../../utils/normalize-genre";
-import { confirm } from 'devextreme/ui/dialog';
+import {confirm} from 'devextreme/ui/dialog';
 import {AppService} from "../../../app.service";
 
 @Component({
@@ -25,6 +25,7 @@ export class MovieDetailsComponent {
   sanitizer = inject(DomSanitizer);
   httpClient = inject(HttpClient);
   trailerHref: string = '';
+  viewed = false;
 
   @Input() set value(value: any) {
     value = {...value};
@@ -32,7 +33,7 @@ export class MovieDetailsComponent {
     this.trailerHref = this.sanitizeUrl(value.trailerHref) as string
     this._value = value;
 
-
+    this.viewed = !!this.appService.user.viewed.find((x: any) => x.id === value.id)
   }
 
   @Output() close = new EventEmitter();
@@ -53,25 +54,33 @@ export class MovieDetailsComponent {
     return '';
   }
 
-  handleViewed() {}
+  handleViewed() {
+    const user = this.appService.user;
+    this.httpClient.post(`/api/viewed`, { userId: user.id, movieId: this._value.id }).subscribe((user) => {
+      this.appService.user = user;
+
+      this.viewed = !!this.appService.user.viewed.find((x: any) => x.id === this._value.id)
+
+      localStorage.setItem('user', JSON.stringify(user))
+    });
+  }
 
   handleEdit() {
     this.editing = true
   }
 
-  handleDelete(){
+  handleDelete() {
     // alert('ПОДОЖДИ. не удаляй')
     const id = this._value.id
 
     let result = confirm("<i>Удалить?</i>", "Подтверждение");
     result.then((dialogResult) => {
-      if(dialogResult){
-        console.log(id)
-          this.httpClient.delete(`/api/Movies(${id})`).subscribe(() => {
-            this.editing = false;
-            this.close.emit();
-            window.location.reload()
-          })
+      if (dialogResult) {
+        this.httpClient.delete(`/api/Movies(${id})`).subscribe(() => {
+          this.editing = false;
+          this.close.emit();
+          window.location.reload()
+        })
       }
     });
 
@@ -97,10 +106,10 @@ export class MovieDetailsComponent {
     payload.append("files", file)
 
     this.httpClient.patch(`/api/Movies(${id})`, payload).subscribe(() => {
-        this.editing = false;
-        this.close.emit();
-        window.location.reload()
-      })
+      this.editing = false;
+      this.close.emit();
+      window.location.reload()
+    })
 
   }
 
