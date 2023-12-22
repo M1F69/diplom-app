@@ -20,6 +20,15 @@ export class MovieDetailsComponent {
   sanitizer = inject(DomSanitizer);
 
   sanitizeUrl(url: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    if (match && match[2].length == 11) {
+      console.log(match[2]);
+      let sepratedID = match[2];
+      let embedUrl = '//www.youtube.com/embed/' + sepratedID;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    }
+
+    return '';
   }
 }
