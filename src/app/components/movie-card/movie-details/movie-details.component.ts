@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, inject, Input, Output, SecurityContext} from "@angular/core";
 import {DxPopupModule, DxTemplateModule} from "devextreme-angular";
 import {MovieCoverComponent} from "../../movie-cover";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   standalone: true,
@@ -15,4 +16,10 @@ import {MovieCoverComponent} from "../../movie-cover";
 export class MovieDetailsComponent {
   @Input() value: any;
   @Output() close = new EventEmitter();
+
+  sanitizer = inject(DomSanitizer);
+
+  sanitizeUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }

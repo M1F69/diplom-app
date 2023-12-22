@@ -32,7 +32,7 @@
         [editorOptions]="{ dataSource: typeStore, displayExpr: 'name', valueExpr: 'id' }"
       >
         <dxo-label text="Категория" />
-        <dxi-validation-rule type="required" message="Дата обязательное"/>
+        <dxi-validation-rule type="required" message="Категория обязательна"/>
       </dxi-item>
 
       <dxi-item
@@ -68,6 +68,15 @@
       >
         <dxo-label text="Описание" />
         <dxi-validation-rule type="required" message="Описание обязательное"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="trailerHref"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="Ссылка на видео" />
+        <dxi-validation-rule type="required" message="Ссылка на видео обязательное"/>
       </dxi-item>
 
       <dxi-item [colSpan]="3">

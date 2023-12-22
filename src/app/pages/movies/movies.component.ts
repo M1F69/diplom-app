@@ -148,10 +148,11 @@ export class MoviesComponent {
     })
   }
 
-  handleSave({name, year, genre, description, file, type}: any) {
+  handleSave({name, year, genre, description, file, trailerHref, type}: any) {
     const payload = new FormData();
 
     payload.append("name", name)
+    payload.append("trailerHref", trailerHref)
     payload.append("description", description)
     payload.append("year", year.getFullYear())
     payload.append(`type`, type)
