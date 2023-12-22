@@ -11,3 +11,4 @@ export const Category = [
   ['Military', 'Военный'],
   ['Detective', 'Детектив'],
 ] as const
+

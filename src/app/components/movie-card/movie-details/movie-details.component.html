@@ -1,10 +1,15 @@
 <dx-popup
   [visible]="true"
-  [title]="value.name"
+  [title]="_value.name"
   [showCloseButton]="true"
   [hideOnOutsideClick]="true"
   (onHiding)="close.emit()"
 >
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    [options]="{ icon: 'edit', type: 'normal', stylingMode: 'text', onClick: handleEdit }"
+  />
   <div *dxTemplate="let data of 'content'">
     <div class="flex flex-row">
       <div></div>
@@ -14,7 +19,7 @@
             <iframe
               width="560"
               height="315"
-              [src]="value.trailerHref"
+              [src]="trailerHref"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -22,7 +27,7 @@
             ></iframe>
           </div>
           <div class="h-[315px] max-w-[350px] w-auto">
-            <app-movie-cover tabindex="0" [id]="value.id"/>
+            <app-movie-cover tabindex="0" [id]="_value.id"/>
           </div>
         </div>
         <div>
@@ -30,26 +35,33 @@
             <div class="dx-fieldset-header">Основная информация</div>
             <div class="dx-field">
               <div class="dx-field-label">Год выхода</div>
-              <div class="dx-field-value-static">{{value.year}}</div>
+              <div class="dx-field-value-static">{{_value.year}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Категория</div>
-              <div class="dx-field-value-static">{{value.genre}}</div>
+              <div class="dx-field-value-static">{{_value.genre}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Жанр</div>
-              <div class="dx-field-value-static">{{value.type}}</div>
+              <div class="dx-field-value-static">{{_value.type}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Описание</div>
               <div class="dx-field-value-static">
-                {{value.description}}
+                {{_value.description}}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </dx-popup>
+
+
+
+
+@if(editing) {
+  <app-create-dialog mode="edit" [data]="_value" (save)="handleUpdate($event) " (close)="editing = false"/>
+}
+

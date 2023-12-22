@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from "@angular/core";
+import {Component, EventEmitter, inject, Input, Output, ViewChild, ViewEncapsulation} from "@angular/core";
 import {ButtonModule, DatepickerModule, FormModule, SelectModule, TextInputModule, UploadModule} from "ng-devui";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {
@@ -10,7 +10,9 @@ import {
   DxSelectBoxModule
 } from "devextreme-angular";
 import ArrayStore from "devextreme/data/array_store";
-
+import {getGenreBy} from "../../../utils/normalize-genre";
+import {getTypeBy} from "../../../utils/normalize-type";
+import {MovieCoverService} from "../../../components/movie-cover/movie-cover.service";
 
 @Component({
   standalone: true,
@@ -35,8 +37,32 @@ import ArrayStore from "devextreme/data/array_store";
   encapsulation: ViewEncapsulation.None
 })
 export class CreateDialogComponent {
+
+  service = inject(MovieCoverService);
+
   @Output() save = new EventEmitter<any>();
   @Output() close = new EventEmitter<any>();
+
+  @Input() mode: 'edit' | 'create' = 'create';
+
+  @Input() set data(v: any) {
+
+    const t = v.genre.map((v: any) => getGenreBy(v, "numb"))
+    this.service.get(v.id).subscribe((blob) => {
+      this.file = new File([blob], "name");
+      this.href = URL.createObjectURL(this.file);
+    })
+
+    this.record = {
+      name: v.name,
+      description: v.description,
+      year: new Date().setFullYear(v.year),
+      trailerHref: v.trailerHref,
+      genre: t,
+      type: getTypeBy(v.type, "numb")
+    }
+    this.genres = t
+  }
 
   @ViewChild(DxFormComponent) dxFormRef!: DxFormComponent;
 
@@ -75,7 +101,7 @@ export class CreateDialogComponent {
   handleSave() {
     const validation = this.dxFormRef.instance.validate()
 
-    if(!validation.isValid || !this.file) {
+    if (!validation.isValid || !this.file) {
       return;
     }
     this.save.emit({...this.dxFormRef.formData, genre: [...this.genres], file: this.file});

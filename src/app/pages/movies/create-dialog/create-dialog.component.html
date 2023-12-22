@@ -4,6 +4,7 @@
     location="after"
     [options]="{ icon: 'save', type: 'normal', stylingMode: 'text', onClick: handleSave }"
   />
+
   <div *dxTemplate="let data of 'content'">
     <dx-form [formData]="record" [colCount]="3" labelMode="outside" labelLocation="top">
       <dxi-item
