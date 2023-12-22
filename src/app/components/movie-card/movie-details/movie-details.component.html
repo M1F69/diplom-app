@@ -8,6 +8,11 @@
   <dxi-toolbar-item
     widget="dxButton"
     location="after"
+    [options]="{ icon: 'trash', type: 'normal', stylingMode: 'text', onClick: handleDelete }"
+  />
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
     [options]="{ icon: 'edit', type: 'normal', stylingMode: 'text', onClick: handleEdit }"
   />
   <div *dxTemplate="let data of 'content'">
@@ -39,11 +44,11 @@
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Категория</div>
-              <div class="dx-field-value-static">{{_value.genre}}</div>
+              <div class="dx-field-value-static">{{getGenresBy( _value.genre,'ru')}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Жанр</div>
-              <div class="dx-field-value-static">{{_value.type}}</div>
+              <div class="dx-field-value-static">{{getTypeBy(_value.type, 'ru')}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Описание</div>

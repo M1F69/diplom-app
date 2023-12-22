@@ -4,6 +4,9 @@ import {MovieCoverComponent} from "../../movie-cover";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CreateDialogComponent} from "../../../pages/movies/create-dialog";
 import {HttpClient} from "@angular/common/http";
+import {getTypeBy} from "../../../utils/normalize-type";
+import {getGenreBy, getGenresBy} from "../../../utils/normalize-genre";
+import { confirm } from 'devextreme/ui/dialog';
 
 @Component({
   standalone: true,
@@ -52,6 +55,25 @@ export class MovieDetailsComponent {
     this.editing = true
   }
 
+  handleDelete(){
+    // alert('ПОДОЖДИ. не удаляй')
+    const id = this._value.id
+
+    let result = confirm("<i>Удалить?</i>", "Подтверждение");
+    result.then((dialogResult) => {
+      if(dialogResult){
+        console.log(id)
+          this.httpClient.delete(`/api/Movies(${id})`).subscribe(() => {
+            this.editing = false;
+            this.close.emit();
+            window.location.reload()
+          })
+      }
+    });
+
+
+  }
+
   handleUpdate({name, year, genre, description, file, trailerHref, type}: any) {
     const id = this._value.id
 
@@ -71,14 +93,19 @@ export class MovieDetailsComponent {
     payload.append("files", file)
 
     this.httpClient.patch(`/api/Movies(${id})`, payload).subscribe(() => {
-      this.editing = false;
-    })
-    // }
-    // http://84.54.44.140/api/Movies(002fb8cd-89ad-4f38-857f-5885bf74b8fb)
-    // save change in movie entity (mb by id)
+        this.editing = false;
+        this.close.emit();
+        window.location.reload()
+      })
+
   }
 
   constructor() {
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
+
+  protected readonly getTypeBy = getTypeBy;
+  protected readonly getGenreBy = getGenreBy;
+  protected readonly getGenresBy = getGenresBy;
 }

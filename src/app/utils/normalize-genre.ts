@@ -17,3 +17,12 @@ export function getGenreBy(value:any, key: 'numb' | 'eng' | 'ru' ){
     return !!Object.values(element).find((v)=> v===value)
   })?.[key]
 }
+
+
+
+export function getGenresBy(value:any, key: 'numb' | 'eng' | 'ru' ){
+return  value.map((g:any) =>{
+
+    return getGenreBy(g,key)
+  })
+}

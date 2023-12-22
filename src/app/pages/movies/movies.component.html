@@ -2,7 +2,7 @@
   <div class="text-lg space-x-4 select-none">
     <span class="text-slate-900 font-bold cursor-pointer" (click)="handleRouteHome()">Главная</span>
     <span class="text-slate-600 font-medium">/</span>
-    <span class="text-slate-600 font-medium">{{ category }}</span>
+    <span class="text-slate-600 font-medium">{{getGenreBy(category, 'ru' )}}</span>
   </div>
 
   <div>

@@ -1,0 +1,42 @@
+<dx-popup [visible]="true" title="Добавление">
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    [options]="{ icon: 'plus', type: 'normal', stylingMode: 'text', onClick: login }"
+  />
+
+<!--  <dxi-toolbar-item-->
+<!--    widget="dxButton"-->
+<!--    location="after"-->
+<!--    [options]="{ icon: 'sun', type: 'normal', stylingMode: 'text', onClick: login() }"-->
+<!--  />-->
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-form [formData]="record" [colCount]="3" labelMode="outside" labelLocation="top">
+      <dxi-item
+        dataField="login"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="Login"/>
+        <dxi-validation-rule type="required" message="Login обязательное"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="login"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="Password"/>
+        <dxi-validation-rule type="required" message="Password обязательное"/>
+      </dxi-item>
+    </dx-form>
+  </div>
+</dx-popup>
+
+
+
+@if(creatingUser) {
+  <app-user-create />
+}
+

@@ -12,6 +12,7 @@ import {filterCategory, filterType} from "../../utils/odata";
 import {MovieCardComponent, MovieCoverComponent} from "../../components";
 
 import {CreateDialogComponent} from "./create-dialog";
+import {getGenreBy} from "../../utils/normalize-genre";
 
 
 enum MovieTypeFlag {
@@ -179,4 +180,5 @@ export class MoviesComponent {
   }
 
 
+    protected readonly getGenreBy = getGenreBy;
 }

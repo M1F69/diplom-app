@@ -6,6 +6,12 @@ import {provideHttpClient} from "@angular/common/http";
 
 import { routes } from './app.routes';
 
+//@ts-ignore
+import deMessages from "devextreme/localization/messages/ru.json";
+import { locale, loadMessages } from "devextreme/localization";
+
+loadMessages(deMessages);
+locale(navigator.language);
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),

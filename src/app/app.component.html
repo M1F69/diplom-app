@@ -1,1 +1,14 @@
+<div class="absolute   right-[10%] top-[10%]">
+  <dx-button
+  icon="user"
+  (onClick)="handleUser()"
+/>
+</div>
 <router-outlet />
+
+
+@if(login) {
+  <app-user-card />
+<!--  <app-user-card (close)="creating = false"/>-->
+}
+
