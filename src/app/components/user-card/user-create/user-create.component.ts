@@ -5,8 +5,6 @@ import {DxFormModule, DxPopupModule} from "devextreme-angular";
   standalone: true,
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
-
-
   imports: [
     DxPopupModule,
     DxFormModule

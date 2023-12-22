@@ -9,6 +9,7 @@ import { routes } from './app.routes';
 //@ts-ignore
 import deMessages from "devextreme/localization/messages/ru.json";
 import { locale, loadMessages } from "devextreme/localization";
+import {AppService} from "./app.service";
 
 loadMessages(deMessages);
 locale(navigator.language);
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
-    provideHttpClient()
+    provideHttpClient(),
+    AppService
   ]
 };

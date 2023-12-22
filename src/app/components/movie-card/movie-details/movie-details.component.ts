@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {getTypeBy} from "../../../utils/normalize-type";
 import {getGenreBy, getGenresBy} from "../../../utils/normalize-genre";
 import { confirm } from 'devextreme/ui/dialog';
+import {AppService} from "../../../app.service";
 
 @Component({
   standalone: true,
@@ -20,6 +21,7 @@ import { confirm } from 'devextreme/ui/dialog';
   templateUrl: './movie-details.component.html'
 })
 export class MovieDetailsComponent {
+  appService = inject(AppService);
   sanitizer = inject(DomSanitizer);
   httpClient = inject(HttpClient);
   trailerHref: string = '';
@@ -50,6 +52,8 @@ export class MovieDetailsComponent {
 
     return '';
   }
+
+  handleViewed() {}
 
   handleEdit() {
     this.editing = true
@@ -103,6 +107,7 @@ export class MovieDetailsComponent {
   constructor() {
     this.handleEdit = this.handleEdit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleViewed = this.handleViewed.bind(this)
   }
 
   protected readonly getTypeBy = getTypeBy;

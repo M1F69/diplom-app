@@ -5,16 +5,24 @@
   [hideOnOutsideClick]="true"
   (onHiding)="close.emit()"
 >
-  <dxi-toolbar-item
-    widget="dxButton"
-    location="after"
-    [options]="{ icon: 'trash', type: 'normal', stylingMode: 'text', onClick: handleDelete }"
-  />
-  <dxi-toolbar-item
-    widget="dxButton"
-    location="after"
-    [options]="{ icon: 'edit', type: 'normal', stylingMode: 'text', onClick: handleEdit }"
-  />
+  @if(appService.user.id !== null) {
+    <dxi-toolbar-item
+      widget="dxButton"
+      location="after"
+      [options]="{ icon: 'eyeopen', type: 'normal', stylingMode: 'text', onClick: handleViewed }"
+    />
+    <dxi-toolbar-item
+      widget="dxButton"
+      location="after"
+      [options]="{ icon: 'trash', type: 'normal', stylingMode: 'text', onClick: handleDelete }"
+    />
+    <dxi-toolbar-item
+      widget="dxButton"
+      location="after"
+      [options]="{ icon: 'edit', type: 'normal', stylingMode: 'text', onClick: handleEdit }"
+    />
+  }
+
   <div *dxTemplate="let data of 'content'">
     <div class="flex flex-row">
       <div></div>

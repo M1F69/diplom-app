@@ -1,6 +1,6 @@
 import {Component} from "@angular/core"
 import {DxFormModule, DxPopupModule} from "devextreme-angular";
-import {UserCreateComponent} from "./user-create/user.create.component";
+import {UserCreateComponent} from "./user-create/user-create.component";
 
 @Component({
   standalone: true,

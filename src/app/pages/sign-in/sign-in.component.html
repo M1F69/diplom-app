@@ -1,0 +1,22 @@
+<div class="absolute inset-0 flex justify-center items-center bg-gray-50">
+  <div class="relative w-72 p-8 space-y-8 bg-white shadow">
+    <dx-load-panel [visible]="loading" />
+    <dx-form>
+      <dxi-item
+        dataField="username"
+        widget="dxTextBox"
+      >
+
+      </dxi-item>
+      <dxi-item
+        dataField="password"
+        widget="dxTextBox"
+        [editorOptions]="{ mode: 'password' }"
+      >
+
+      </dxi-item>
+    </dx-form>
+    <dx-button text="Войти" width="100%" type="default" (onClick)="handleSignIn(true)"/>
+    <dx-button text="Войти без авторизации" width="100%" stylingMode="text" type="normal" (onClick)="handleSignIn(false)"/>
+  </div>
+</div>

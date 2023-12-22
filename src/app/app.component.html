@@ -1,14 +1,13 @@
-<div class="absolute   right-[10%] top-[10%]">
-  <dx-button
-  icon="user"
-  (onClick)="handleUser()"
-/>
-</div>
-<router-outlet />
-
-
-@if(login) {
-  <app-user-card />
-<!--  <app-user-card (close)="creating = false"/>-->
+@if (appService.user !== null) {
+  <div class="absolute right-[5%] top-[5%]">
+    <dx-button
+      icon="panelleft"
+      (onClick)="appService.signOut()"
+    />
+  </div>
 }
+
+<router-outlet/>
+
+
 

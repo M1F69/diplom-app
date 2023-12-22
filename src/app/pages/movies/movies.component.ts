@@ -13,6 +13,7 @@ import {MovieCardComponent, MovieCoverComponent} from "../../components";
 
 import {CreateDialogComponent} from "./create-dialog";
 import {getGenreBy} from "../../utils/normalize-genre";
+import {AppService} from "../../app.service";
 
 
 enum MovieTypeFlag {
@@ -42,6 +43,7 @@ enum MovieTypeFlag {
 export class MoviesComponent {
   router = inject(Router);
   httpClient = inject(HttpClient);
+  appService = inject(AppService);
 
   category: string = '';
   loading: boolean = false;

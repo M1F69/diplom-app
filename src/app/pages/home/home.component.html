@@ -1,7 +1,12 @@
 <div class="flex h-80  pt-12 justify-center items-center">
   <div class="relative h-full w-2/3 flex justify-center">
-    <img class="object-cover h-full w-max-full"
-         src="https://i.pinimg.com/564x/66/6c/ef/666cef33089db06d5232069b03940dcb.jpg" alt="*">
+    <dx-gallery
+      [loop]="true"
+      [height]="300"
+      [dataSource]="[]"
+      [showNavButtons]="true"
+      [showIndicator]="true"
+    />
   </div>
 </div>
 <div class="relative flex flex-col flex-1 my-12">
