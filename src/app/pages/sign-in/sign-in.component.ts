@@ -43,4 +43,9 @@ export class SignInComponent {
     this.appService.signInAnonymous()
     this.router.navigate([''])
   }
+
+  handleSignUp() {
+    this.router.navigate(['sign-up'])
+
+  }
 }

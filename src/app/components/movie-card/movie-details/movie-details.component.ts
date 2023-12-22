@@ -64,6 +64,16 @@ export class MovieDetailsComponent {
       localStorage.setItem('user', JSON.stringify(user))
     });
   }
+  handleUnViewed() {
+    const user = this.appService.user;
+    this.httpClient.post(`/api/unviewed`, { userId: user.id, movieId: this._value.id }).subscribe((user) => {
+      this.appService.user = user;
+
+      this.viewed = !!this.appService.user.viewed.find((x: any) => x.id === this._value.id)
+
+      localStorage.setItem('user', JSON.stringify(user))
+    });
+  }
 
   handleEdit() {
     this.editing = true
@@ -117,6 +127,7 @@ export class MovieDetailsComponent {
     this.handleEdit = this.handleEdit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleViewed = this.handleViewed.bind(this)
+    this.handleUnViewed = this.handleUnViewed.bind(this)
   }
 
   protected readonly getTypeBy = getTypeBy;

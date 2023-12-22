@@ -6,17 +6,20 @@
         dataField="username"
         widget="dxTextBox"
       >
-
+        <dxo-label text="Логин"/>
+        <dxi-validation-rule type="required" message="Логин обязательно"/>
       </dxi-item>
       <dxi-item
         dataField="password"
         widget="dxTextBox"
         [editorOptions]="{ mode: 'password' }"
       >
-
+        <dxo-label text="Пароль"/>
+        <dxi-validation-rule type="required" message="Пароль обязательно"/>
       </dxi-item>
     </dx-form>
     <dx-button text="Войти" width="100%" type="default" (onClick)="handleSignIn(true)"/>
     <dx-button text="Войти без авторизации" width="100%" stylingMode="text" type="normal" (onClick)="handleSignIn(false)"/>
+    <dx-button text="Зарегестрироваться" width="100%" stylingMode="text" type="normal" (onClick)="handleSignUp()"/>
   </div>
 </div>

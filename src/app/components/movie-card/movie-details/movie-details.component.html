@@ -13,6 +13,12 @@
         location="after"
         [options]="{ icon: 'eyeopen', type: 'normal', stylingMode: 'text', onClick: handleViewed }"
       />
+    } @else {
+      <dxi-toolbar-item
+        widget="dxButton"
+        location="after"
+        [options]="{ icon: 'eyeclose', type: 'normal', stylingMode: 'text', onClick: handleUnViewed }"
+      />
     }
 
 
