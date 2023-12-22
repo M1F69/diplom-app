@@ -1,18 +1,18 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {DxPopupModule, DxTemplateModule} from "devextreme-angular";
-import {MovieCoverComponent} from "../../../components";
+import {MovieCoverComponent} from "../../movie-cover";
 
 @Component({
   standalone: true,
-  selector: 'app-movie-dialog',
+  selector: 'app-movie-details',
   imports: [
     DxPopupModule,
     DxTemplateModule,
-    MovieCoverComponent
+    MovieCoverComponent,
   ],
-  templateUrl: './movie-dialog.component.html'
+  templateUrl: './movie-details.component.html'
 })
-export class TypeDialogComponent {
-  @Input() selection: any;
+export class MovieDetailsComponent {
+  @Input() value: any;
   @Output() close = new EventEmitter();
 }

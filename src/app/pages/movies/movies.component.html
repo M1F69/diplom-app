@@ -13,8 +13,6 @@
     >
       <dx-button type="default" width="100%" text="Новый фильм"/>
 
-      <!--      <div class="flex items-center inset-0 h-full mx-auto px-3 ">-->
-      <!--      </div>-->
     </div>
 
   </div>
@@ -72,7 +70,7 @@
       <div class="min-h-0 min-w-0 h-full w-full overflow-y-auto no-scrollbar">
         <div class="relative flex flex-wrap justify-between items-start gap-14">
           @for (item of collection;track item.id) {
-            <app-movie-card [item]="item" (click)="handleMovieClick(item)"/>
+            <app-movie-card [item]="item"/>
           }
         </div>
       </div>
@@ -82,9 +80,6 @@
 
 </div>
 
-@if (selection) {
-  <app-movie-dialog (close)="selection = null" [selection]="selection" />
-}
 
 @if(creating) {
   <app-create-dialog (save)="handleSave($event) " (close)="creating = false"/>

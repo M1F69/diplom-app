@@ -1,0 +1,13 @@
+<div class="mt-6 flex flex-col justify-between space-y-4 px-12">
+
+  <div class="text-slate-900 text-xl font-bold cursor-pointer hover:text-black/70" (click)="handleRouteMovies()">
+    <span>{{title}}</span>
+  </div>
+
+  <div class="flex flex-row gap-14 py-4">
+    @for (item of collection; track item.id) {
+      <app-movie-card [item]="item"/>
+    }
+  </div>
+
+</div>

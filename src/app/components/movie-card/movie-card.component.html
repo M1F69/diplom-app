@@ -4,3 +4,7 @@
 <div class="mt-2">
   <span class="text-xs text-lime-800 ">{{ item.name }}</span>
 </div>
+
+@if(details) {
+  <app-movie-details [value]="item" (close)="details = false"/>
+}

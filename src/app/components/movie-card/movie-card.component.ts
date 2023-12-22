@@ -1,6 +1,8 @@
-import {Component, Input} from "@angular/core";
+import {Component, ElementRef, inject, Input} from "@angular/core";
 import {DxLoadIndicatorModule} from "devextreme-angular";
 import {MovieCoverComponent} from "../movie-cover";
+import {MovieDetailsComponent} from "./movie-details";
+import {fromEvent} from "rxjs";
 
 @Component({
   standalone: true,
@@ -9,9 +11,16 @@ import {MovieCoverComponent} from "../movie-cover";
   templateUrl: './movie-card.component.html',
   imports: [
     DxLoadIndicatorModule,
-    MovieCoverComponent
+    MovieCoverComponent,
+    MovieDetailsComponent,
   ],
 })
 export class MovieCardComponent {
   @Input() item: any;
+
+  details = false;
+
+  constructor() {
+    fromEvent(inject(ElementRef).nativeElement, 'click').subscribe(() => this.details = true)
+  }
 }

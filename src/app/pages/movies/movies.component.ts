@@ -4,13 +4,15 @@ import {Component, inject} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
 
+import {DxButtonModule, DxLoadIndicatorModule, DxPopupModule} from "devextreme-angular";
+
 import {ModalModule} from 'ng-devui/modal';
 
-import {MovieCardComponent, MovieCoverComponent} from "../../components";
-import {CreateDialogComponent} from "./create-dialog/create-dialog.component";
-import {DxButtonModule, DxLoadIndicatorModule, DxPopupModule} from "devextreme-angular";
-import {TypeDialogComponent} from "./movie-dialog/movie-dialog.component";
 import {filterCategory, filterType} from "../../utils/odata";
+import {MovieCardComponent, MovieCoverComponent} from "../../components";
+
+import {CreateDialogComponent} from "./create-dialog";
+
 
 enum MovieTypeFlag {
   None = 0,
@@ -26,13 +28,11 @@ enum MovieTypeFlag {
   standalone: true,
   imports: [
     ModalModule,
-    TypeDialogComponent,
     MovieCardComponent,
     MovieCoverComponent,
     DxButtonModule,
     DxPopupModule,
     DxLoadIndicatorModule,
-    TypeDialogComponent,
     CreateDialogComponent,
   ],
   templateUrl: './movies.component.html',
@@ -171,7 +171,7 @@ export class MoviesComponent {
 
   constructor() {
     inject(ActivatedRoute).queryParams.pipe(
-      map((params) => params['category'])
+      map((params) => params['id'])
     ).subscribe((value) => {
       this.category = value;
       this.query();

@@ -1,6 +1,6 @@
 <dx-popup
   [visible]="true"
-  [title]="selection.name"
+  [title]="value.name"
   [showCloseButton]="true"
   [hideOnOutsideClick]="true"
   (onHiding)="close.emit()"
@@ -22,7 +22,7 @@
             ></iframe>
           </div>
           <div class="h-[315px] max-w-[350px] w-auto">
-            <app-movie-cover tabindex="0" [id]="selection.id"/>
+            <app-movie-cover tabindex="0" [id]="value.id"/>
           </div>
         </div>
         <div>
@@ -30,20 +30,20 @@
             <div class="dx-fieldset-header">Основная информация</div>
             <div class="dx-field">
               <div class="dx-field-label">Год выхода</div>
-              <div class="dx-field-value-static">{{selection.year}}</div>
+              <div class="dx-field-value-static">{{value.year}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Категория</div>
-              <div class="dx-field-value-static">{{selection.genre}}</div>
+              <div class="dx-field-value-static">{{value.genre}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Жанр</div>
-              <div class="dx-field-value-static">{{selection.type}}</div>
+              <div class="dx-field-value-static">{{value.type}}</div>
             </div>
             <div class="dx-field">
               <div class="dx-field-label">Описание</div>
               <div class="dx-field-value-static">
-                {{selection.description}}
+                {{value.description}}
               </div>
             </div>
           </div>
