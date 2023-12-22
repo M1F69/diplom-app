@@ -1,0 +1,49 @@
+<dx-popup [visible]="true" title="Добавление" >
+
+
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    [options]="{ icon: 'sun', type: 'normal', stylingMode: 'text',  }"
+  />
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-form [formData]="record" [colCount]="3" labelMode="outside" labelLocation="top">
+      <dxi-item
+        dataField="nickname"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="nickname" />
+        <dxi-validation-rule type="required" message="nickname обязательное"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="fullname"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="fullname" />
+        <dxi-validation-rule type="required" message="fullname обязательное"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="password"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="password" />
+        <dxi-validation-rule type="required" message="password обязательное"/>
+      </dxi-item>
+
+      <dxi-item
+        dataField="mail"
+        editorType="dxTextBox"
+        [colSpan]="3"
+      >
+        <dxo-label text="mail" />
+        <dxi-validation-rule type="required" message="mail обязательное"/>
+      </dxi-item>
+    </dx-form>
+  </div>
+</dx-popup>
