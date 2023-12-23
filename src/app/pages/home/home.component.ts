@@ -17,4 +17,5 @@ import {DxGalleryModule} from "devextreme-angular";
 })
 export class HomeComponent {
   Category = Category
+  dataSourse = ['assets/1.jpg','assets/2.jpg','assets/3.jpeg', 'assets/4.jpeg', 'assets/5.jpeg', 'assets/6.jpeg','assets/7.jpeg','assets/8.jpeg','assets/9.jpeg','assets/10.jpeg', 'assets/11.jpeg',]
 }
