@@ -5,20 +5,7 @@
     <span class="text-slate-600 font-medium">{{getGenreBy(category, 'ru' )}}</span>
   </div>
 
-  @if(appService.user.id !== null) {
 
-    <div>
-
-      <div
-        class="select-none relative inline-flex items-center cursor-pointer h-8 rounded bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700"
-        (click)="creating = true"
-      >
-        <dx-button type="default" width="100%" text="Новый фильм"/>
-
-      </div>
-
-    </div>
-  }
 
 
 
@@ -86,9 +73,7 @@
 </div>
 
 
-@if(creating) {
-  <app-create-dialog (save)="handleSave($event) " (close)="creating = false"/>
-}
+
 
 
 

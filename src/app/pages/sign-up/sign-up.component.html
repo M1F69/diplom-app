@@ -41,3 +41,6 @@
     <dx-button text="Войти" width="100%" stylingMode="text" type="normal" (onClick)="handleSignIn()"/>
   </div>
 </div>
+
+
+<dx-toast [(visible)]="isVisibleToast" [type]="type" [message]="message"></dx-toast>

@@ -7,6 +7,10 @@ export class AppService {
   httpClient = inject(HttpClient);
 
   user: any = null;
+  public isVisibleToast: boolean = false;
+  public type: "custom" | "error" | "info" | "success" | "warning" = 'error';
+  public message = '';
+
 
   constructor() {
     const userRaw = localStorage.getItem('user');
@@ -23,6 +27,14 @@ export class AppService {
     )
   }
 
+
+  public showToast(type: "custom" | "error" | "info" | "success" | "warning",message:string) {
+    this.type = type;
+    this.message = message;
+    this.isVisibleToast = true;
+
+
+  }
   public signInAnonymous() {
     this.user = {
       id: null,

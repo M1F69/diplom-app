@@ -1,5 +1,5 @@
 import {Component, inject, ViewChild} from '@angular/core';
-import {DxButtonModule, DxFormComponent, DxFormModule, DxLoadPanelModule} from "devextreme-angular";
+import {DxButtonModule, DxFormComponent, DxFormModule, DxLoadPanelModule, DxToastModule} from "devextreme-angular";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 
@@ -11,7 +11,8 @@ import {Router} from "@angular/router";
   imports: [
     DxFormModule,
     DxButtonModule,
-    DxLoadPanelModule
+    DxLoadPanelModule,
+    DxToastModule
   ]
 })
 export class SignInComponent {
@@ -19,6 +20,9 @@ export class SignInComponent {
   appService = inject(AppService)
 
   loading = false;
+  isVisibleToast:boolean=false;
+ type:"custom" | "error" | "info" | "success" | "warning" = 'error';
+  message = 'Проверьте данные, логин или пароль не верны';
 
   @ViewChild(DxFormComponent) dxFormRef!: DxFormComponent
 
@@ -34,6 +38,7 @@ export class SignInComponent {
           this.loading = false
         },
         error: () =>{
+          this.isVisibleToast = true;
           this.loading = false
         }
       });
@@ -48,4 +53,5 @@ export class SignInComponent {
     this.router.navigate(['sign-up'])
 
   }
+
 }

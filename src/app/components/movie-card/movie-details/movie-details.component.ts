@@ -1,5 +1,5 @@
 import {Component, EventEmitter, inject, Input, Output} from "@angular/core";
-import {DxPopupModule, DxTemplateModule} from "devextreme-angular";
+import {DxPopupModule, DxTemplateModule, DxToastModule} from "devextreme-angular";
 import {MovieCoverComponent} from "../../movie-cover";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CreateDialogComponent} from "../../../pages/movies/create-dialog";
@@ -8,6 +8,7 @@ import {getTypeBy} from "../../../utils/normalize-type";
 import {getGenreBy, getGenresBy} from "../../../utils/normalize-genre";
 import {confirm} from 'devextreme/ui/dialog';
 import {AppService} from "../../../app.service";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ import {AppService} from "../../../app.service";
     DxTemplateModule,
     MovieCoverComponent,
     CreateDialogComponent,
+    DxToastModule,
   ],
   templateUrl: './movie-details.component.html'
 })
@@ -40,6 +42,7 @@ export class MovieDetailsComponent {
 
   _value: any = {};
   editing: boolean = false;
+
 
 
   sanitizeUrl(url: string) {
@@ -80,17 +83,22 @@ export class MovieDetailsComponent {
   }
 
   handleDelete() {
-    // alert('ПОДОЖДИ. не удаляй')
     const id = this._value.id
 
     let result = confirm("<i>Удалить?</i>", "Подтверждение");
     result.then((dialogResult) => {
       if (dialogResult) {
-        this.httpClient.delete(`/api/Movies(${id})`).subscribe(() => {
-          this.editing = false;
-          this.close.emit();
-          window.location.reload()
-        })
+        this.httpClient.delete(`/api/Movies(${id})`).subscribe(   {
+            next: () => {
+              this.appService.showToast("success","Фильм удалён")
+              this.editing = false;
+                this.close.emit();
+                window.location.reload()
+            },
+            error: () =>{
+            }
+          })
+
       }
     });
 
@@ -115,10 +123,15 @@ export class MovieDetailsComponent {
 
     payload.append("files", file)
 
-    this.httpClient.patch(`/api/Movies(${id})`, payload).subscribe(() => {
-      this.editing = false;
-      this.close.emit();
-      window.location.reload()
+    this.httpClient.patch(`/api/Movies(${id})`, payload).subscribe({
+      next: () => {
+
+        this.editing = false;
+          this.close.emit();
+          window.location.reload()
+      },
+      error: () =>{
+      }
     })
 
   }

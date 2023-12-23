@@ -12,9 +12,58 @@
 }
 
 body {
-  @apply bg-lime-100 text-lime-800;
+  @apply w-screen h-screen ;
+
+  background: hsla(345, 100%, 93%, 1);
+
+  background: linear-gradient(45deg, hsla(345, 100%, 93%, 1) 0%, hsla(277, 100%, 93%, 1) 40%, hsla(187, 81%, 84%, 1) 100%);
+
+  background: -moz-linear-gradient(45deg, hsla(345, 100%, 93%, 1) 0%, hsla(277, 100%, 93%, 1) 40%, hsla(187, 81%, 84%, 1) 100%);
+
+  background: -webkit-linear-gradient(45deg, hsla(345, 100%, 93%, 1) 0%, hsla(277, 100%, 93%, 1) 40%, hsla(187, 81%, 84%, 1) 100%);
+
+  //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FFDBE4", endColorstr="#F2DDFF", GradientType=1 );
+
 }
 
 input.ng-invalid {
   @apply border-red-500
+}
+
+app-movies {
+
+
+  .dx-button.dx-button-default {
+    border-radius: 4px;
+    background-color: #FDDDEF;
+    color: #000;
+    :active{
+      border-radius: 4px;
+      background-color: #e3629f;
+      color: #000;
+    }
+    :hover{
+      border-radius: 4px;
+      background-color: #ee96c7;
+      color: #000;
+    }
+  }
+  .dx-button.dx-button-default:hover {
+
+  }
+  .dx-button.dx-button-default:active{
+
+  }
+
+  dx-widget.dx-button.dx-button-mode-outlined.dx-button-normal.dx-button-has-text{
+    border-radius: 4px;
+    background-color: transparent;
+    color: #000;
+  }
+  dx-widget.dx-button.dx-button-mode-contained.dx-button-default.dx-button-has-text{
+    border-radius: 4px;
+    background-color: #e3629f;
+    color: #000;
+
+  }
 }

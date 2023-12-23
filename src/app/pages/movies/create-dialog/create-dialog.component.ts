@@ -7,7 +7,7 @@ import {
   DxFormComponent,
   DxFormModule, DxListModule,
   DxPopupModule,
-  DxSelectBoxModule
+  DxSelectBoxModule, DxToastModule
 } from "devextreme-angular";
 import ArrayStore from "devextreme/data/array_store";
 import {getGenreBy} from "../../../utils/normalize-genre";
@@ -31,7 +31,8 @@ import {MovieCoverService} from "../../../components/movie-cover/movie-cover.ser
     DxButtonModule,
     DxPopupModule,
     DxDropDownBoxModule,
-    DxListModule
+    DxListModule,
+    DxToastModule
   ],
   templateUrl: './create-dialog.component.html',
   encapsulation: ViewEncapsulation.None
@@ -44,6 +45,8 @@ export class CreateDialogComponent {
   @Output() close = new EventEmitter<any>();
 
   @Input() mode: 'edit' | 'create' = 'create';
+
+
 
   @Input() set data(v: any) {
 

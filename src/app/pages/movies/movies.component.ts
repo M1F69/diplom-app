@@ -112,7 +112,7 @@ export class MoviesComponent {
 
   }
 
-  query() {
+  public query() {
     this.loading = true;
 
     const filters: any = [];
@@ -151,26 +151,6 @@ export class MoviesComponent {
     })
   }
 
-  handleSave({name, year, genre, description, file, trailerHref, type}: any) {
-    const payload = new FormData();
-
-    payload.append("name", name)
-    payload.append("trailerHref", trailerHref)
-    payload.append("description", description)
-    payload.append("year", year.getFullYear())
-    payload.append(`type`, type)
-
-    for (let i = 0; i < genre.length; i++) {
-      payload.append(`genre[${i}]`, genre[i])
-    }
-
-    payload.append("files", file)
-
-    this.httpClient.post("/api/Movies/", payload).subscribe(() => {
-      this.query();
-      this.creating = false;
-    })
-  }
 
   constructor() {
     inject(ActivatedRoute).queryParams.pipe(

@@ -23,3 +23,5 @@
     <dx-button text="Зарегестрироваться" width="100%" stylingMode="text" type="normal" (onClick)="handleSignUp()"/>
   </div>
 </div>
+
+<dx-toast [(visible)]="isVisibleToast" [type]="type" [message]="message"></dx-toast>

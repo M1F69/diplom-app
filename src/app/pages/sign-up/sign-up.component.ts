@@ -1,5 +1,5 @@
 import {Component, inject, ViewChild} from '@angular/core';
-import {DxButtonModule, DxFormComponent, DxFormModule, DxLoadPanelModule} from "devextreme-angular";
+import {DxButtonModule, DxFormComponent, DxFormModule, DxLoadPanelModule, DxToastModule} from "devextreme-angular";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
@@ -12,7 +12,8 @@ import {HttpClient} from "@angular/common/http";
   imports: [
     DxFormModule,
     DxButtonModule,
-    DxLoadPanelModule
+    DxLoadPanelModule,
+    DxToastModule
   ]
 })
 export class SignUpComponent {
@@ -21,6 +22,10 @@ export class SignUpComponent {
   httpClient = inject(HttpClient)
 
   loading = false;
+
+  isVisibleToast:boolean=false;
+  type:"custom" | "error" | "info" | "success" | "warning" = 'error';
+  message = 'Проверьте данные';
 
   @ViewChild(DxFormComponent) dxFormRef!: DxFormComponent
 
@@ -42,6 +47,7 @@ export class SignUpComponent {
         this.loading = false
       },
       error: () => {
+        this.isVisibleToast= true
         this.loading = false
       }
     });

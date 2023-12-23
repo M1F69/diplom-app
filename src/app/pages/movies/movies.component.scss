@@ -4,11 +4,10 @@
   @apply flex flex-col;
   @apply mx-auto
 
-
 }
 
 .sr-only {
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border-width: 0;
   height: 1px;
   margin: -1px;
