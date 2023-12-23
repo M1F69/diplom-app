@@ -3,10 +3,8 @@
 
     @if(appService.user.id !== null) {
 
-      <div>
-        <div
-          (click)="creating = true"
-        >
+      <div class="app-button-add">
+        <div (click)="creating = true">
           <dx-button type="default" width="100%" text="Новый фильм"/>
         </div>
       </div>

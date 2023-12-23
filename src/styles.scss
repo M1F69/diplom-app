@@ -25,6 +25,20 @@ input.ng-invalid {
   @apply border-red-500
 }
 
+app-button-add {
+
+  dx-button {
+    background-color: #fdddef !important;
+    &:hover {
+      background-color: #ee96c7 !important;
+    }
+    &:active {
+      background-color: #ee96c7 !important;
+    }
+  }
+
+}
+
 app-movies {
   dx-button {
 
@@ -48,39 +62,3 @@ app-movies {
 
   }
 }
-
-//
-//.dx-button.dx-button-default {
-//  border-radius: 4px;
-//  background-color: #FDDDEF;
-//  :active{
-//    border-radius: 4px;
-//    background-color: #e3629f;
-//    color: #000;
-//  }
-//  :hover{
-//    border-radius: 4px;
-//    background-color: #ee96c7;
-//    color: #000;
-//  }
-//}
-//
-//app-movies {
-//  .dx-button.dx-button-default:hover {
-//
-//  }
-//  .dx-button.dx-button-default:active{
-//
-//  }
-//
-//  dx-widget.dx-button.dx-button-mode-outlined.dx-button-normal.dx-button-has-text{
-//    border-radius: 4px;
-//    background-color: transparent;
-//    color: #000;
-//  }
-//  dx-widget.dx-button.dx-button-mode-contained.dx-button-default.dx-button-has-text{
-//    border-radius: 4px;
-//    background-color: #e3629f;
-//    color: #000;
-//  }
-//}
