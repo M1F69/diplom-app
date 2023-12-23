@@ -1,6 +1,6 @@
 import {map} from "rxjs";
 
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
 
@@ -25,8 +25,10 @@ enum MovieTypeFlag {
 }
 
 @Component({
-  selector: 'app-movies',
   standalone: true,
+  selector: 'app-movies',
+  styleUrl: './movies.component.scss',
+  templateUrl: './movies.component.html',
   imports: [
     MovieCardComponent,
     MovieCoverComponent,
@@ -35,8 +37,6 @@ enum MovieTypeFlag {
     DxLoadIndicatorModule,
     CreateDialogComponent,
   ],
-  templateUrl: './movies.component.html',
-  styleUrl: './movies.component.scss'
 })
 export class MoviesComponent {
   router = inject(Router);

@@ -1,8 +1,8 @@
-<div class="w-36 h-48">
-  <app-movie-cover [id]="item.id"/>
-</div>
-<div class="mt-2">
-  <span class="text-xs text-lime-800 ">{{ item.name }}</span>
+<div class="flex flex-col">
+  <app-movie-cover [id]="item.id" class="w-36 h-48"/>
+  <div class="mt-2 text-xs text-black text-center">
+    {{ item.name }}
+  </div>
 </div>
 
 @if(details) {

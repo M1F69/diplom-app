@@ -1,4 +1,4 @@
-import {Component, inject, Input} from "@angular/core";
+import {Component, inject, Input, ViewEncapsulation} from "@angular/core";
 import {DxLoadIndicatorModule} from "devextreme-angular";
 import {MovieCoverService} from "./movie-cover.service";
 
@@ -6,6 +6,7 @@ import {MovieCoverService} from "./movie-cover.service";
 @Component({
   standalone: true,
   selector: 'app-movie-cover',
+  styleUrl: './movie-cover.component.scss',
   templateUrl: './movie-cover.component.html',
   imports: [
     DxLoadIndicatorModule
