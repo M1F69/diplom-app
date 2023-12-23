@@ -6,7 +6,6 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 
 import {DxButtonModule, DxLoadIndicatorModule, DxPopupModule} from "devextreme-angular";
 
-import {ModalModule} from 'ng-devui/modal';
 
 import {filterCategory, filterType} from "../../utils/odata";
 import {MovieCardComponent, MovieCoverComponent} from "../../components";
@@ -29,7 +28,6 @@ enum MovieTypeFlag {
   selector: 'app-movies',
   standalone: true,
   imports: [
-    ModalModule,
     MovieCardComponent,
     MovieCoverComponent,
     DxButtonModule,

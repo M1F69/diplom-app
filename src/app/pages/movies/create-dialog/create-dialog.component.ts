@@ -1,11 +1,11 @@
 import {Component, EventEmitter, inject, Input, Output, ViewChild, ViewEncapsulation} from "@angular/core";
-import {ButtonModule, DatepickerModule, FormModule, SelectModule, TextInputModule, UploadModule} from "ng-devui";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   DxButtonModule,
   DxDropDownBoxModule,
   DxFormComponent,
-  DxFormModule, DxListModule,
+  DxFormModule,
+  DxListModule,
   DxPopupModule,
   DxSelectBoxModule
 } from "devextreme-angular";
@@ -18,13 +18,7 @@ import {MovieCoverService} from "../../../components/movie-cover/movie-cover.ser
   standalone: true,
   selector: 'app-create-dialog',
   imports: [
-    FormModule,
-    TextInputModule,
     FormsModule,
-    DatepickerModule,
-    SelectModule,
-    UploadModule,
-    ButtonModule,
     ReactiveFormsModule,
     DxFormModule,
     DxSelectBoxModule,
