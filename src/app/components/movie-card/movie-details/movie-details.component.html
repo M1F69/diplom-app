@@ -5,7 +5,7 @@
   [hideOnOutsideClick]="true"
   (onHiding)="close.emit()"
 >
-  @if(appService.user().id !== null) {
+  @if(appService.user().id !== null || true) {
 
     @if(!viewed) {
       <dxi-toolbar-item

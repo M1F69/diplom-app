@@ -84,3 +84,36 @@ input.ng-invalid {
     color: var(--app-text-200);
   }
 }
+
+
+.dx-overlay-content {
+  .dx-dialog-button[aria-label="Да"] {
+    background-color: var(--app-primary);
+
+    &:hover {
+      background-color: var(--app-primary-100);
+    }
+
+    &:active {
+      background-color: var(--app-primary);
+    }
+  }
+
+  .dx-dialog-button[aria-label="Нет"] {
+    color: var(--app-primary);
+    background-color: var(--app-primary-900);
+    border-color: var(--app-primary-600);
+
+    &:hover {
+      color: var(--app-primary);
+      background-color: var(--app-primary-800);
+      border-color: var(--app-primary-600);
+    }
+
+    &:active {
+      color: var(--app-background-900) !important;
+      background-color: var(--app-primary) !important;
+      border-color: var(--app-primary);
+    }
+  }
+}
