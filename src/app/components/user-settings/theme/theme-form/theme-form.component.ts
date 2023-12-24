@@ -16,5 +16,11 @@ export class ThemeFormComponent {
 
   constructor() {
     this.value = this.themeService.colors;
+
+    this.handleValueChange = this.handleValueChange.bind(this);
+  }
+
+  handleValueChange() {
+    this.themeService.setColors(this.value)
   }
 }

@@ -1,7 +1,8 @@
-<dx-form [formData]="value">
+<dx-form [formData]="value" (formDataChange)="handleValueChange()">
   <dxi-item
     dataField="text"
     editorType="dxColorBox"
+    [editorOptions]="{ onValueChanged: handleValueChange }"
   >
     <dxo-label text="Цвет текста" />
     <dxi-validation-rule type="required" message="Название обязательное"/>
@@ -10,6 +11,7 @@
   <dxi-item
     dataField="primary"
     editorType="dxColorBox"
+    [editorOptions]="{ onValueChanged: handleValueChange }"
   >
     <dxo-label text="Цвет оснвной" />
     <dxi-validation-rule type="required" message="Название обязательное"/>
@@ -18,6 +20,7 @@
   <dxi-item
     dataField="success"
     editorType="dxColorBox"
+    [editorOptions]="{ onValueChanged: handleValueChange }"
   >
     <dxo-label text="Цвет успеха" />
     <dxi-validation-rule type="required" message="Название обязательное"/>
@@ -26,6 +29,7 @@
   <dxi-item
     dataField="warning"
     editorType="dxColorBox"
+    [editorOptions]="{ onValueChanged: handleValueChange }"
   >
     <dxo-label text="Цет предупреждений" />
     <dxi-validation-rule type="required" message="Название обязательное"/>
@@ -34,6 +38,7 @@
   <dxi-item
     dataField="danger"
     editorType="dxColorBox"
+    [editorOptions]="{ onValueChanged: handleValueChange }"
   >
     <dxo-label text="Цвет ошибок" />
     <dxi-validation-rule type="required" message="Название обязательное"/>
@@ -42,6 +47,7 @@
   <dxi-item
     dataField="background"
     editorType="dxColorBox"
+    [editorOptions]="{ onValueChanged: handleValueChange }"
   >
     <dxo-label text="Цвет фона" />
     <dxi-validation-rule type="required" message="Название обязательное"/>

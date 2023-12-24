@@ -17,8 +17,8 @@
 body {
   @apply w-screen h-screen ;
 
-  background: hsla(345, 100%, 93%, 1);
-  background: linear-gradient(45deg, hsla(345, 100%, 93%, 1) 0%, hsla(277, 100%, 93%, 1) 40%, hsla(187, 81%, 84%, 1) 100%);
+  background-color: var(--app-background) !important;
+  //background-color: linear-gradient(45deg, hsla(345, 100%, 93%, 1) 0%, hsla(277, 100%, 93%, 1) 40%, hsla(187, 81%, 84%, 1) 100%);
 }
 
 input.ng-invalid {

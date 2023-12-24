@@ -40,7 +40,7 @@ export class ThemeService {
   }
 
   createPalette(color: string, value: string) {
-    const prefix = 'app-';
+    const prefix = '--app-';
     const palette: Record<string, string> = {};
     for (const amount of AMOUNTS) {
       if (amount === 0) {
