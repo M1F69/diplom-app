@@ -43,7 +43,6 @@ export class MovieDetailsComponent {
   editing: boolean = false;
 
 
-
   sanitizeUrl(url: string) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     let match = url.match(regExp);
@@ -58,7 +57,7 @@ export class MovieDetailsComponent {
 
   handleViewed() {
     const user = this.appService.user();
-    this.httpClient.post(`/api/viewed`, { userId: user.id, movieId: this._value.id }).subscribe((user) => {
+    this.httpClient.post(`/api/viewed`, {userId: user.id, movieId: this._value.id}).subscribe((user) => {
       this.appService.user.set(user);
 
       this.viewed = !!this.appService.user().viewed.find((x: any) => x.id === this._value.id)
@@ -66,9 +65,10 @@ export class MovieDetailsComponent {
       localStorage.setItem('user', JSON.stringify(user))
     });
   }
+
   handleUnViewed() {
     const user = this.appService.user();
-    this.httpClient.post(`/api/unviewed`, { userId: user.id, movieId: this._value.id }).subscribe((user) => {
+    this.httpClient.post(`/api/unviewed`, {userId: user.id, movieId: this._value.id}).subscribe((user) => {
       this.appService.user.set(user);
 
       this.viewed = !!this.appService.user().viewed.find((x: any) => x.id === this._value.id)
@@ -87,16 +87,16 @@ export class MovieDetailsComponent {
     let result = confirm("<i>Удалить?</i>", "Подтверждение");
     result.then((dialogResult) => {
       if (dialogResult) {
-        this.httpClient.delete(`/api/Movies(${id})`).subscribe(   {
-            next: () => {
-              this.appService.showToast("success","Фильм удалён")
-              this.editing = false;
-                this.close.emit();
-                window.location.reload()
-            },
-            error: () =>{
-            }
-          })
+        this.httpClient.delete(`/api/Movies(${id})`).subscribe({
+          next: () => {
+            this.appService.showToast("success", "Фильм удалён")
+            this.editing = false;
+            this.close.emit();
+            window.location.href = window.location.href
+          },
+          error: () => {
+          }
+        })
 
       }
     });
@@ -124,12 +124,11 @@ export class MovieDetailsComponent {
 
     this.httpClient.patch(`/api/Movies(${id})`, payload).subscribe({
       next: () => {
-
         this.editing = false;
-          this.close.emit();
-          window.location.reload()
+        this.close.emit();
+        window.location.href = window.location.href
       },
-      error: () =>{
+      error: () => {
       }
     })
 
