@@ -32,7 +32,7 @@ export class HomeCategoryComponent implements OnInit {
     this.httpClient.get('/api/Movies/', {
       params: {
         $filter: filterCategory(this.id),
-        $top: 6
+        $top: 5
       }
     }).subscribe({
       next: ({value}: any) => {

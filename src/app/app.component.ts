@@ -34,9 +34,9 @@ export class AppComponent {
     if (!user) return [];
 
     return user.id !== null ? [
-      {value: 'append', text: 'append'},
-      {value: 'settings', text: 'settings'},
-      {value: 'sign-out', text: 'sign-out'}
+      {value: 'append', text: 'Добавить'},
+      {value: 'settings', text: 'Настройки'},
+      {value: 'sign-out', text: 'Выйти'}
     ] : [
       {value: 'settings', text: 'settings'},
       {value: 'sign-out', text: 'sign-out'}
