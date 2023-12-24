@@ -25,15 +25,17 @@ export class HomeCategoryComponent implements OnInit {
   public collection: any[] = [];
 
   handleRouteMovies() {
-    this.router.navigate(['movies'], {queryParams: { id: this.id }});
+    this.router.navigate(['movies'], {
+      queryParams: { id: this.id }
+    });
   }
 
   ngOnInit() {
     this.httpClient.get('/api/Movies/', {
-      params: {
+      params: this.id ? {
         $filter: filterCategory(this.id),
         $top: 5
-      }
+      } : {}
     }).subscribe({
       next: ({value}: any) => {
         this.collection = value;

@@ -1,15 +1,24 @@
 <div class="mt-6 flex flex-col justify-between space-y-4 px-12">
 
   <div class="home-category-text text-xl font-bold cursor-pointer" (click)="handleRouteMovies()">
-    <span>{{title}}</span>
+    <span>{{ title }}</span>
   </div>
 
-  <div class="overflow-hidden">
-    <div class="flex flex-row gap-14 py-4 no-scrollbar overflow-x-auto min-w-0">
-      @for (item of collection; track item.id) {
+  @if (id) {
+    <div class="overflow-hidden">
+      <div class="flex flex-row gap-14 py-4 no-scrollbar overflow-x-auto min-w-0">
+        @for (item of collection;track item.id) {
+          <app-movie-card [item]="item"/>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="flex flex-wrap gap-14 py-4 no-scrollbar justify-between">
+      @for (item of collection;track item.id) {
         <app-movie-card [item]="item"/>
       }
     </div>
-  </div>
+  }
+
 
 </div>

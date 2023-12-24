@@ -1,4 +1,4 @@
-import {map} from "rxjs";
+import {map, Subscription} from "rxjs";
 
 import {Component, inject, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
@@ -41,14 +41,13 @@ enum MovieTypeFlag {
 export class MoviesComponent {
   router = inject(Router);
   httpClient = inject(HttpClient);
-  appService = inject(AppService);
 
   category: string = '';
   loading: boolean = false;
-  creating: boolean = false;
   collection: any = []
   selection: any = null
   filter: MovieTypeFlag = MovieTypeFlag.None;
+  operation?: Subscription;
 
   get hasDefault() {
     return (this.filter & MovieTypeFlag.Default) === MovieTypeFlag.Default;
@@ -111,6 +110,8 @@ export class MoviesComponent {
   }
 
   public query() {
+    this.operation?.unsubscribe();
+
     this.loading = true;
 
     const filters: any = [];
@@ -133,9 +134,16 @@ export class MoviesComponent {
 
     let params = new HttpParams()
 
-    params = params.append("$filter", filters.length ? `(${filters.join(" or ")})` + ` and ${filterCategory(this.category)}` : filterCategory(this.category))
+    let filterStr = filters.length ? `(${filters.join(" or ")})` : '';
+    if(this.category) {
+      filterStr += filterStr.length ? ` and ${filterCategory(this.category)}` : filterCategory(this.category)
+    }
 
-    this.httpClient.get('/api/Movies/', {
+    if(filterStr.length) {
+      params = params.append("$filter", filterStr)
+    }
+
+    this.operation = this.httpClient.get('/api/Movies/', {
       params
     }).subscribe({
       next: ({value}: any) => {
