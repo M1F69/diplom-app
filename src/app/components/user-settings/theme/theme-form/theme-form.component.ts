@@ -1,5 +1,5 @@
 import {Component, inject} from "@angular/core"
-import {DxFormModule} from "devextreme-angular";
+import {DxColorBoxModule, DxFormModule} from "devextreme-angular";
 import {ThemeService} from "../theme.service";
 
 @Component({
@@ -8,6 +8,7 @@ import {ThemeService} from "../theme.service";
   templateUrl: './theme-form.component.html',
   imports: [
     DxFormModule,
+    DxColorBoxModule
   ]
 })
 export class ThemeFormComponent {
