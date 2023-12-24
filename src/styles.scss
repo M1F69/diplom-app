@@ -1,4 +1,3 @@
-
 @import "devextreme/dist/css/dx.fluent.blue.light.css";
 
 @tailwind base;
@@ -22,43 +21,66 @@ body {
 }
 
 input.ng-invalid {
-  @apply border-red-500
+  //@apply border-red-500;
+  border-color: var(--app-danger);
 }
 
-app-button-add {
+.user-command-button {
+  .dx-button {
+    background-color: var(--app-primary);
 
-  dx-button {
-    background-color: #fdddef !important;
     &:hover {
-      background-color: #ee96c7 !important;
+      background-color: var(--app-primary-100);
     }
+
     &:active {
-      background-color: #ee96c7 !important;
+      background-color: var(--app-primary);
     }
   }
-
 }
 
-app-movies {
-  dx-button {
+.movie-type-button {
+  color: var(--app-primary);
+  background-color: var(--app-primary-900);
+  border-color: var(--app-primary-600);
 
-    &.dx-button-mode-contained {
-      background-color: #fdddef !important;
+  &:hover {
+    color: var(--app-primary);
+    background-color: var(--app-primary-800);
+    border-color: var(--app-primary-600);
+  }
 
-      &:hover {}
-      &:active {}
-    }
+  &:active {
+    color: var(--app-primary);
+    background-color: var(--app-primary-900);
+    border-color: var(--app-primary-600);
+  }
+}
 
-    &.dx-button-mode-outlined {
-      border-color: #ee96c7;
 
-      &:hover {
-        border-color: #fdddef;
-        background-color: #fdddef;
-      }
+.movie-type-button-active {
+  color: var(--app-background-900) !important;
+  background-color: var(--app-primary) !important;
+  border-color: var(--app-primary);
 
-      &:active {}
-    }
+  &:hover {
+    color: var(--app-background-900);
+    background-color: var(--app-primary-100) !important;
+    border-color: var(--app-primary-100) !important;
+  }
 
+  &:active {
+    color: var(--app-primary);
+    background-color: var(--app-primary-900);
+    border-color: var(--app-primary-600);
+  }
+}
+
+
+.home-category-text {
+  color: var(--app-text);
+
+  &:hover {
+    color: var(--app-text-200);
   }
 }

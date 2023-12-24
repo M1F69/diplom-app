@@ -9,6 +9,8 @@
   <div class="flex flex-row h-8 space-x-8">
 
     <dx-button
+      class="movie-type-button"
+      [class.movie-type-button-active]="hasDefault"
       width="100%"
       text="Фильмы"
       [type]="hasDefault ? 'default' : 'normal'"
@@ -17,6 +19,8 @@
     />
 
     <dx-button
+      class="movie-type-button"
+      [class.movie-type-button-active]="hasAnime"
       width="100%"
       text="Аниме"
       [type]="hasAnime ? 'default' : 'normal'"
@@ -25,6 +29,8 @@
     />
 
     <dx-button
+      class="movie-type-button"
+      [class.movie-type-button-active]="hasSerial"
       width="100%"
       text="Сериалы"
       [type]="hasSerial ? 'default' : 'normal'"
@@ -33,6 +39,8 @@
     />
 
     <dx-button
+      class="movie-type-button"
+      [class.movie-type-button-active]="hasCartoon"
       width="100%"
       text="Мультфильмы"
       [type]="hasCartoon ? 'default' : 'normal'"
