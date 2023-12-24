@@ -8,7 +8,6 @@ import {getTypeBy} from "../../../utils/normalize-type";
 import {getGenreBy, getGenresBy} from "../../../utils/normalize-genre";
 import {confirm} from 'devextreme/ui/dialog';
 import {AppService} from "../../../app.service";
-import {AppComponent} from "../../../app.component";
 
 @Component({
   standalone: true,
@@ -35,7 +34,7 @@ export class MovieDetailsComponent {
     this.trailerHref = this.sanitizeUrl(value.trailerHref) as string
     this._value = value;
 
-    this.viewed = !!this.appService.user.viewed.find((x: any) => x.id === value.id)
+    this.viewed = !!this.appService.user().viewed.find((x: any) => x.id === value.id)
   }
 
   @Output() close = new EventEmitter();
@@ -58,21 +57,21 @@ export class MovieDetailsComponent {
   }
 
   handleViewed() {
-    const user = this.appService.user;
+    const user = this.appService.user();
     this.httpClient.post(`/api/viewed`, { userId: user.id, movieId: this._value.id }).subscribe((user) => {
-      this.appService.user = user;
+      this.appService.user.set(user);
 
-      this.viewed = !!this.appService.user.viewed.find((x: any) => x.id === this._value.id)
+      this.viewed = !!this.appService.user().viewed.find((x: any) => x.id === this._value.id)
 
       localStorage.setItem('user', JSON.stringify(user))
     });
   }
   handleUnViewed() {
-    const user = this.appService.user;
+    const user = this.appService.user();
     this.httpClient.post(`/api/unviewed`, { userId: user.id, movieId: this._value.id }).subscribe((user) => {
-      this.appService.user = user;
+      this.appService.user.set(user);
 
-      this.viewed = !!this.appService.user.viewed.find((x: any) => x.id === this._value.id)
+      this.viewed = !!this.appService.user().viewed.find((x: any) => x.id === this._value.id)
 
       localStorage.setItem('user', JSON.stringify(user))
     });

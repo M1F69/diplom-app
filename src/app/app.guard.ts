@@ -11,7 +11,7 @@ export class AppGuard {
   appService = inject(AppService);
 
   canActivate(): boolean {
-    if (this.appService.user !== null) {
+    if (this.appService.user() !== null) {
       return true;
     } else {
       this.router.navigate(['/sign-in']);

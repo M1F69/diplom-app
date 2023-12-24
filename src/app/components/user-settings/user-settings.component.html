@@ -1,0 +1,11 @@
+<dx-popup
+  title="Настройки"
+  [visible]="true"
+  [showCloseButton]="true"
+  [hideOnOutsideClick]="true"
+  (onHiding)="close.emit()"
+>
+  <div *dxTemplate="let data of 'content'">
+    <app-theme-form />
+  </div>
+</dx-popup>

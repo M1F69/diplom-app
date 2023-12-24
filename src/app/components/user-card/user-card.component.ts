@@ -6,8 +6,6 @@ import {UserCreateComponent} from "./user-create/user-create.component";
   standalone: true,
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
-
-
   imports: [
     DxPopupModule,
     DxFormModule,

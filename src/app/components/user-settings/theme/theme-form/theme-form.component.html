@@ -1,0 +1,49 @@
+<dx-form [formData]="value">
+  <dxi-item
+    dataField="text"
+    editorType="dxColorBox"
+  >
+    <dxo-label text="Цвет текста" />
+    <dxi-validation-rule type="required" message="Название обязательное"/>
+  </dxi-item>
+
+  <dxi-item
+    dataField="primary"
+    editorType="dxColorBox"
+  >
+    <dxo-label text="Цвет оснвной" />
+    <dxi-validation-rule type="required" message="Название обязательное"/>
+  </dxi-item>
+
+  <dxi-item
+    dataField="success"
+    editorType="dxColorBox"
+  >
+    <dxo-label text="Цвет успеха" />
+    <dxi-validation-rule type="required" message="Название обязательное"/>
+  </dxi-item>
+
+  <dxi-item
+    dataField="warning"
+    editorType="dxColorBox"
+  >
+    <dxo-label text="Цет предупреждений" />
+    <dxi-validation-rule type="required" message="Название обязательное"/>
+  </dxi-item>
+
+  <dxi-item
+    dataField="danger"
+    editorType="dxColorBox"
+  >
+    <dxo-label text="Цвет ошибок" />
+    <dxi-validation-rule type="required" message="Название обязательное"/>
+  </dxi-item>
+
+  <dxi-item
+    dataField="background"
+    editorType="dxColorBox"
+  >
+    <dxo-label text="Цвет фона" />
+    <dxi-validation-rule type="required" message="Название обязательное"/>
+  </dxi-item>
+</dx-form>

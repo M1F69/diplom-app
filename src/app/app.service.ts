@@ -1,4 +1,4 @@
-import {inject, Injectable} from "@angular/core";
+import {inject, Injectable, signal} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs";
 
@@ -6,7 +6,7 @@ import {tap} from "rxjs";
 export class AppService {
   httpClient = inject(HttpClient);
 
-  user: any = null;
+  user = signal<any>(null);
   public isVisibleToast: boolean = false;
   public type: "custom" | "error" | "info" | "success" | "warning" = 'error';
   public message = '';
@@ -15,14 +15,14 @@ export class AppService {
   constructor() {
     const userRaw = localStorage.getItem('user');
 
-    this.user = userRaw ? JSON.parse(userRaw) : null
+    this.user.set(userRaw ? JSON.parse(userRaw) : null)
   }
 
   public signIn(username: string, password: string) {
     return this.httpClient.post('/api/sign-in', {username, password}).pipe(
       tap((data) => {
-        this.user = data
-        localStorage.setItem('user', JSON.stringify(this.user))
+        this.user.set(data)
+        localStorage.setItem('user', JSON.stringify(this.user()))
       })
     )
   }
@@ -36,19 +36,19 @@ export class AppService {
 
   }
   public signInAnonymous() {
-    this.user = {
+    this.user.set({
       id: null,
-      nickName: "",
-      fullName: "",
+      nickName: "Аноним",
+      fullName: "Аноним",
       password: "",
       mail: "",
       viewed: []
-    }
-    localStorage.setItem('user', JSON.stringify(this.user))
+    })
+    localStorage.setItem('user', JSON.stringify(this.user()))
   }
 
   public signOut() {
-    this.user = null;
+    this.user.set(null);
     localStorage.removeItem('user')
 
     window.location.reload()

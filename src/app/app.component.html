@@ -1,17 +1,24 @@
-@if (appService.user !== null) {
+@if (appService.user() !== null) {
   <div class="absolute right-[5%] top-[5%]">
 
-    @if(appService.user.id !== null) {
+    <!--    @if(appService.user.id !== null) {-->
 
-      <div class="app-button-add">
-        <div (click)="creating = true">
-          <dx-button type="default" width="100%" text="Новый фильм"/>
-        </div>
-      </div>
-    }
-    <dx-button
-      icon="panelleft"
-      (onClick)="appService.signOut()"
+    <!--      <div class="app-button-add">-->
+
+    <!--      </div>-->
+    <!--    }-->
+    <!--    <dx-button-->
+    <!--      icon="panelleft"-->
+    <!--      (onClick)="appService.signOut()"-->
+    <!--    />-->
+    <dx-drop-down-button
+      type="default"
+      width="100%"
+      keyExpr="id"
+      displayExpr="text"
+      [text]="appService.user().nickName"
+      [items]="buttons()"
+      (onItemClick)="handleAction($event)"
     />
   </div>
 }
@@ -22,8 +29,12 @@
 
 
 
-@if(creating) {
-  <app-create-dialog (save)="handleSave($event) " (close)="creating = false"/>
+@if (creating) {
+  <app-create-dialog (save)="handleSave($event)" (close)="creating = false"/>
+}
+
+@if (settings) {
+  <app-user-settings (close)="settings = false"/>
 }
 
 <dx-toast [(visible)]="appService.isVisibleToast" [type]="appService.type" [message]="appService.message"></dx-toast>
