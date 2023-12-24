@@ -38,8 +38,8 @@ export class AppComponent {
       {value: 'settings', text: 'Настройки'},
       {value: 'sign-out', text: 'Выйти'}
     ] : [
-      {value: 'settings', text: 'settings'},
-      {value: 'sign-out', text: 'sign-out'}
+      {value: 'settings', text: 'Настройки'},
+      {value: 'sign-out', text: 'Выйти'}
     ]
   })
 
