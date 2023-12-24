@@ -21,6 +21,8 @@ export class AppService {
   public signIn(username: string, password: string) {
     return this.httpClient.post('/api/sign-in', {username, password}).pipe(
       tap((data) => {
+        localStorage.removeItem('theme');
+
         this.user.set(data)
         localStorage.setItem('user', JSON.stringify(this.user()))
       })
@@ -28,14 +30,17 @@ export class AppService {
   }
 
 
-  public showToast(type: "custom" | "error" | "info" | "success" | "warning",message:string) {
+  public showToast(type: "custom" | "error" | "info" | "success" | "warning", message: string) {
     this.type = type;
     this.message = message;
     this.isVisibleToast = true;
 
 
   }
+
   public signInAnonymous() {
+    localStorage.removeItem('theme');
+
     this.user.set({
       id: null,
       nickName: "Аноним",
@@ -44,7 +49,7 @@ export class AppService {
       mail: "",
       viewed: []
     })
-    localStorage.setItem('user', JSON.stringify(this.user()))
+    localStorage.setItem('user', JSON.stringify(this.user()));
   }
 
   public signOut() {
