@@ -1,5 +1,6 @@
 :host {
   @apply flex flex-col cursor-pointer w-36 p-4 box-content;
+  color: var(--app-text);
 
   &:hover {
     background-color: var(--app-primary-900);

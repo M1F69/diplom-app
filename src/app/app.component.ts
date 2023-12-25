@@ -1,7 +1,7 @@
 import {Component, computed, effect, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
-import {DxButtonModule, DxDropDownButtonModule, DxToastModule} from "devextreme-angular";
+import {DxButtonModule, DxDropDownButtonModule, DxTextAreaModule, DxToastModule} from "devextreme-angular";
 import {CreateDialogComponent} from "./pages/movies/create-dialog";
 import {UserCardComponent} from "./components/user-card/user-card.component";
 import {AppService} from "./app.service";
@@ -16,7 +16,7 @@ import {UserSettingsComponent} from "./components/user-settings/user-settings.co
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, DxButtonModule, CreateDialogComponent, UserCardComponent, HomeCategoryComponent, DxToastModule, DxDropDownButtonModule, UserSettingsComponent],
+  imports: [CommonModule, RouterOutlet, DxButtonModule, DxTextAreaModule, CreateDialogComponent, UserCardComponent, HomeCategoryComponent, DxToastModule, DxDropDownButtonModule, UserSettingsComponent],
   providers: [MoviesComponent],
   templateUrl: './app.component.html',
 })
