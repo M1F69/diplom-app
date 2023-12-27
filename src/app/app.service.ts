@@ -34,8 +34,6 @@ export class AppService {
     this.type = type;
     this.message = message;
     this.isVisibleToast = true;
-
-
   }
 
   public signInAnonymous() {
